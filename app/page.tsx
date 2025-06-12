@@ -336,7 +336,7 @@ Attached file: ${formData.eventName} Sponsorship Proposal.pdf`;
     try {
       await navigator.clipboard.writeText(generatedEmail);
       toast.success(t.successCopy);
-    } catch (err) {
+    } catch {
       toast.error(t.errorCopy);
     }
   };
