@@ -38,7 +38,6 @@ const translations = {
     title: "Generator Email Sponsorship",
     subtitle:
       "Buat surat permohonan sponsorship profesional untuk Smart IT Festival dengan mudah dan cepat",
-    orgBadge: "Emailkomp Sekolah Vokasi UNS",
     formTitle: "Form Input Data",
     formSubtitle:
       "Lengkapi informasi yang diperlukan untuk menghasilkan email sponsorship",
@@ -91,12 +90,12 @@ const translations = {
         "mengembangkan minat dan bakat mahasiswa di bidang teknologi informasi, memberikan wadah untuk berkreasi dan berinovasi, serta memperkenalkan perkembangan teknologi terkini kepada masyarakat luas",
       senderContact: "smartitfestanjaymabar@gmail.com",
     },
+    optional: "(opsional)",
   },
   en: {
     title: "Sponsorship Email Generator",
     subtitle:
       "Create professional sponsorship request letters for Smart IT Festival easily and quickly",
-    orgBadge: "Emailkomp Vocational School Sebelas Maret University",
     formTitle: "Data Input Form",
     formSubtitle:
       "Complete the required information to generate sponsorship email",
@@ -149,6 +148,7 @@ const translations = {
         "to develop students' interests and talents in information technology, provide a platform for creativity and innovation, and introduce the latest technological developments to the wider community",
       senderContact: "smartitfestanjaymabar@gmail.com",
     },
+    optional: "(optional)",
   },
 };
 
@@ -253,12 +253,15 @@ Acara ini bertujuan ${
             formData.eventPurpose
           } dan diharapkan dapat memberikan manfaat bagi kedua belah pihak.
 
-Manfaat Yang Akan Diperoleh ${formData.targetCompany}:
+Manfaat Yang Akan Diperoleh ${
+            formData.targetCompany
+          } (sesuai paket sponsorship yang dipilih):
 • Penempatan logo perusahaan di seluruh materi promosi
 • Penyebutan nama perusahaan selama acara berlangsung
 • Kesempatan untuk mempromosikan produk/layanan
 • Penyediaan booth/stand khusus untuk perusahaan
 • Dokumentasi lengkap dan laporan kegiatan
+• Dan berbagai manfaat lainnya sesuai tingkatan sponsor
 
 Terlampir proposal lengkap yang berisi detail paket sponsorship dan manfaat yang dapat diperoleh.${meetingSection}
 
@@ -302,12 +305,15 @@ This event aims ${
             formData.eventPurpose
           } and is expected to benefit both parties.
 
-Benefits for ${formData.targetCompany}:
+Benefits for ${
+            formData.targetCompany
+          } (according to selected sponsorship package):
 • Company logo placement on all promotional materials
 • Company name mention throughout the event
 • Opportunities to promote products/services
 • Exclusive booth/stand for the company
 • Complete documentation and event reports
+• Various other benefits according to sponsor tier
 
 Attached is the complete proposal containing sponsorship package details and benefits.${meetingSection}
 
@@ -368,10 +374,16 @@ Attached file: ${formData.eventName} Sponsorship Proposal.pdf`;
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">
-          <div className="flex justify-center items-center gap-4 mb-6">
+          <div className="flex justify-center items-center gap-4 mb-2">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-black rounded-full shadow-lg">
-              <Mail className="h-8 w-8 text-white" />
+              <Mail className="h-6 w-6 text-white" />
             </div>
+          </div>
+          <h1 className="text-5xl font-bold text-black mb-4">{t.title}</h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            {t.subtitle}
+          </p>
+          <div className="flex justify-center items-center mt-4">
             <Button
               onClick={toggleLanguage}
               variant="outline"
@@ -379,16 +391,8 @@ Attached file: ${formData.eventName} Sponsorship Proposal.pdf`;
               className="flex items-center gap-2 border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white bg-white"
             >
               <Globe className="h-4 w-4" />
-              {language === "id" ? "EN" : "ID"}
+              {language === "id" ? "Generate English" : "Generate Indonesia"}
             </Button>
-          </div>
-          <h1 className="text-5xl font-bold text-black mb-4">{t.title}</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            {t.subtitle}
-          </p>
-          <div className="mt-6 inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded-full text-sm font-medium">
-            <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-            {t.orgBadge}
           </div>
         </div>
 
@@ -397,8 +401,8 @@ Attached file: ${formData.eventName} Sponsorship Proposal.pdf`;
           <Card className="shadow-xl border-2 border-gray-300 bg-white">
             <CardHeader className="bg-black mx-3 -mt-2 rounded-md px-6 py-4 text-white">
               <CardTitle className="flex items-center gap-3 text-xl">
-                <div className="p-2 bg-gray-800 rounded-lg">
-                  <Mail className="h-5 w-5" />
+                <div className="p-2 bg-gray-800 rounded-md">
+                  <Mail className="h-4 w-4" />
                 </div>
                 {t.formTitle}
               </CardTitle>
@@ -468,7 +472,10 @@ Attached file: ${formData.eventName} Sponsorship Proposal.pdf`;
                       htmlFor="recipientName"
                       className="text-sm font-medium text-gray-700"
                     >
-                      {t.recipientName}
+                      {t.recipientName}{" "}
+                      <span className="text-gray-500 italic text-xs">
+                        {t.optional}
+                      </span>
                     </Label>
                     <Input
                       id="recipientName"
@@ -485,7 +492,10 @@ Attached file: ${formData.eventName} Sponsorship Proposal.pdf`;
                       htmlFor="recipientPosition"
                       className="text-sm font-medium text-gray-700"
                     >
-                      {t.recipientPosition}
+                      {t.recipientPosition}{" "}
+                      <span className="text-gray-500 italic text-xs">
+                        {t.optional}
+                      </span>
                     </Label>
                     <Input
                       id="recipientPosition"
@@ -504,7 +514,10 @@ Attached file: ${formData.eventName} Sponsorship Proposal.pdf`;
                       htmlFor="meetingTime"
                       className="text-sm font-medium text-gray-700"
                     >
-                      {t.meetingTime}
+                      {t.meetingTime}{" "}
+                      <span className="text-gray-500 italic text-xs">
+                        {t.optional}
+                      </span>
                     </Label>
                     <Input
                       id="meetingTime"
@@ -521,7 +534,10 @@ Attached file: ${formData.eventName} Sponsorship Proposal.pdf`;
                       htmlFor="meetingLocation"
                       className="text-sm font-medium text-gray-700"
                     >
-                      {t.meetingLocation}
+                      {t.meetingLocation}{" "}
+                      <span className="text-gray-500 italic text-xs">
+                        {t.optional}
+                      </span>
                     </Label>
                     <Input
                       id="meetingLocation"
@@ -551,7 +567,10 @@ Attached file: ${formData.eventName} Sponsorship Proposal.pdf`;
                     htmlFor="meetingDate"
                     className="text-sm font-medium text-gray-700"
                   >
-                    {t.meetingDate}
+                    {t.meetingDate}{" "}
+                    <span className="text-gray-500 italic text-xs">
+                      {t.optional}
+                    </span>
                   </Label>
                   <Input
                     id="meetingDate"
@@ -697,8 +716,8 @@ Attached file: ${formData.eventName} Sponsorship Proposal.pdf`;
           <Card className="shadow-xl border-2 border-gray-300 bg-white">
             <CardHeader className="bg-black mx-3 -mt-2 rounded-lg px-6 py-4 text-white">
               <CardTitle className="flex items-center gap-3 text-xl">
-                <div className="p-2 bg-gray-700 rounded-lg">
-                  <Copy className="h-5 w-5" />
+                <div className="p-2 bg-gray-700 rounded-md">
+                  <Copy className="h-4 w-4" />
                 </div>
                 {t.resultTitle}
               </CardTitle>
